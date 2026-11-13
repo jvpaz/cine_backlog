@@ -1,9 +1,10 @@
 import { GoogleGenAI, ThinkingLevel } from '@google/genai';
+import { MovieSuggestion } from '../types/movie';
 
 const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
 const model = 'gemini-3.5-flash-lite';
 
-export type MovieSuggestion = { title: string };
+
 
 export async function getMovieSuggestions(prompt: string): Promise<MovieSuggestion[]> {
   if (!apiKey) {
@@ -17,7 +18,7 @@ export async function getMovieSuggestions(prompt: string): Promise<MovieSuggesti
       thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
       responseMimeType: 'application/json',
     },
-    contents: `Sugira exatamente 5 filmes que combinem com este pedido: "${prompt}". Responda somente com um array JSON de objetos no formato {"title":"título original do filme"}. Sem introdução nem markdown.`,
+    contents: `Sugira exatamente 4 filmes que combinem com este pedido: "${prompt}". Responda somente com um array JSON de objetos no formato {"title":"título original do filme"}. Sem introdução nem markdown.`,
   });
 
   let text = '';
@@ -40,5 +41,5 @@ export async function getMovieSuggestions(prompt: string): Promise<MovieSuggesti
     throw new Error('A IA não retornou sugestões válidas. Tente novamente.');
   }
 
-  return suggestions.slice(0, 5);
+  return suggestions.slice(0, 4);
 }

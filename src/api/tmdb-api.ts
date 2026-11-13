@@ -11,7 +11,7 @@ export async function getMovieSuggestionsFromTMDB(request: string) {
       }
 
       const results = await Promise.all(
-        suggestions.slice(0, 5).map(async ({ title }) => {
+        suggestions.slice(0, 4).map(async ({ title }) => {
           const response = await fetch(
             `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(title)}&language=pt-BR`,
           );

@@ -12,3 +12,5 @@ export type suggestMovieParams = {
   setLoading: (loading: boolean) => void;
   setMovies: (movies: Movie[]) => void;
 };
+
+export type MovieSuggestion = { title: string };
